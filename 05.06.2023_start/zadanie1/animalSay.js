@@ -1,5 +1,5 @@
 module.exports = {
-    sayHello: function () {
+    sayHello: function (message) {
         console.log(`
 
         
@@ -16,12 +16,14 @@ module.exports = {
 ░▐████▀██████░░█████░░
 ░░░▀▀▀░░█████▌░████▀░░
 ░░░░░░░░░▀▀███░▀▀▀░░░░
-░░░Hello from Node!░░░
+░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░
+        ${message}  
 ░░░░░░░░░░░░░░░░░░░░░░
 
             `)
     },
-    sayBye: function () {
+    sayBye: function (message) {
         console.log(`
 █████▀▀▀▀▀▀▀████
 ███▀░░░░░░░░░▀██
@@ -32,7 +34,7 @@ module.exports = {
 ██▓▄┊╰───╯┊▄▓███▌
 █▓▓▓▓▄▃▂▃▄▓▓▓███
 ████████████████
-██See you soon██
+${message}
 ████████████████
         `)
     }

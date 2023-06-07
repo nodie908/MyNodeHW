@@ -1,4 +1,4 @@
-const animalSay = require('./animalSay');
+const animal = require('./animalSay');
 
-animalSay.sayHello();
-animalSay.sayBye();
+animal.sayHello('Hello');
+animal.sayBye('See you soon');
