@@ -1,0 +1,16 @@
+{
+  "name": "14.06.23_bot",
+  "version": "1.0.0",
+  "description": "telega bot",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikitos",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
