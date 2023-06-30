@@ -12,6 +12,10 @@ export class Telegram extends EventEmitter {
         this.bot = new TelegramBot(this.config.token, { polling: true });
         this.users = {};
         this.database = new Database(config);
+        // VN: из-за того что в приложении дважды создаётся экземпляр Database,
+        // попытка вызвать метод addEvent в строке 105 вызывает падение. И bind здесь помочь не может
+        // Вместо этого лучше всего в 105 делать эмит события типа 'newEvent', со всеми данными,
+        // ловить его в app, и уже оттуда дёргать метод addEvent в базе данных
         this.addEvent = this.database.addEvent.bind(this.database);
     }
 
@@ -65,10 +69,10 @@ export class Telegram extends EventEmitter {
                     this.bot.sendMessage(user.chatId, "Введите дату (напр. 12-01-2024):");
                 } else if (!user.event.date) {
                     user.event.date = message;
-                    this.bot.sendMessage(user.chatId, "Введите организатора (ID):");
+                    this.bot.sendMessage(user.chatId, "Введите организатора (ID):");  // VN: это не нужно спрашивать, у нас и так есть id пользователя
                 } else if (!user.event.org_id) {
                     user.event.org_id = parseInt(message);
-                    this.bot.sendMessage(user.chatId, "Это регулярное событие? (0 - нет, 1 - да)");
+                    this.bot.sendMessage(user.chatId, "Это регулярное событие? (0 - нет, 1 - да)"); // VN: на этот вопрос оказалось очень сложно ответить)))
                 } else if (user.event.isRegular === undefined) {
                     user.event.isRegular = parseInt(message);
                     this.bot.sendMessage(user.chatId, "Введите адрес:");
