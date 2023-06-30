@@ -23,6 +23,7 @@ bot.on('message', async (msg) => {
         const message = formatWeatherMessage(weather);
 
         bot.sendMessage(chatId, message, {
+//VN:       parse_mode: 'HTML',    // иначе теги не работают, например <b>
             reply_markup: {
                 keyboard: [['Прогноз на 3 дня'], ['Прогноз на 10 дней']],
                 one_time_keyboard: true,
