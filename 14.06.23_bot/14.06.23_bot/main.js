@@ -9,36 +9,70 @@ const bot = new TelegramBot(TOKEN, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Введите название города, для которого вы хотите узнать о погоде');
+    bot.sendMessage(chatId, 'Введите название города, для которого вы хотите узнать о погоде', {
+        parse_mode: 'HTML',
+        reply_markup: {
+            keyboard: [['Прогноз на 3 дня']],
+            one_time_keyboard: true,
+        },
+    });
 });
-
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const city = msg.text;
 
-    try {
-        const weather = await getWeather(city);
-
-        const message = formatWeatherMessage(weather);
-
-        bot.sendMessage(chatId, message, {
-//VN:       parse_mode: 'HTML',    // иначе теги не работают, например <b>
-            reply_markup: {
-                keyboard: [['Прогноз на 3 дня'], ['Прогноз на 10 дней']],
-                one_time_keyboard: true,
-            },
-        });
-    } catch (error) {
-        bot.sendMessage(chatId, "Не удалось узнать информацию о погоде")
+    if (msg.text === "Прогноз на 3 дня") {
+        try {
+            const forecast = await getThreeDayWeather(city);
+            const message = formatForecastMessage(forecast);
+            bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
+        }  catch (error) {
+            console.error(error); // Вывести ошибку в консоль для отладки
+            bot.sendMessage(chatId, "Произошла ошибка. Пожалуйста, попробуйте еще раз позже");
+        }
+        
+    } else {
+        try {
+            const weather = await getWeather(city);
+            const message = formatWeatherMessage(weather);
+            bot.sendMessage(chatId, message);
+        } catch (error) {
+            bot.sendMessage(chatId, "Не удалось узнать информацию о погоде")
+        }
     }
 });
+
+async function getThreeDayWeather(city) {
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${city}&days=3&aqi=no&alerts=no&lang=ru`;
+    const response = await axios.get(url);
+    return response.data;
+}
 
 async function getWeather(city) {
     const url = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${encodeURIComponent(city)}`;
     const response = await axios.get(url);
     return response.data;
 }
+
+function formatForecastMessage(forecast) {
+    const days = forecast.forecast.days.slice(0, 3);
+    const messages = [];
+
+    messages.push('<b>Прогноз погоды на 3 дня:</b>');
+    for (const day of days) {
+        const date = day.date;
+        const temperature = day.temperature;
+        const weather = day.weather;
+
+        const message = `<b>${date}</b>\nТемпература: ${temperature}\nПогода: ${weather}`;
+        messages.push(message);
+    }
+
+    const formattedMessage = messages.join('\n\n');
+    return formattedMessage;
+}
+
 
 function formatWeatherMessage(weather) {
     const location = weather.location.name;
