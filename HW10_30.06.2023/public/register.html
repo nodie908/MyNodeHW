@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+
+    <h2>Регистрация</h2><br>
+    <form action="/confirm" method="post">
+        <label for="login">Логин: </label>
+        <input name="login" type="text"><br>
+
+        <label for="email">E-mail: </label>
+        <input name="email" type="text"><br>
+
+        <label for="passwd">Пароль: </label>
+        <input name="passwd" type="password"><br>
+
+        <label for="passwd">Повторите пароль: </label>
+        <input name="passwd" type="password"><br>
+
+        <img src="/captcha/0.png"><br>
+        <label for="captcha">Введите код с картинки: </label>
+        <input name="captcha" type="text"><br>
+
+        <input type="submit" title="Зарегистрироваться">
+    </form>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 400px;
+            margin: 0 auto;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+        }
+    </style>
+
+</body>
+</html>
