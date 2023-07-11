@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <style>
+        * {
+            font-size: 24px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .cont {
+            width: 1200px;
+            margin: 0 auto;
+            background: grey;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        .header {
+            display: flex;
+            padding: 5px;
+            margin: 10px;
+            justify-content: space-between;
+        }
+
+        .body {
+            display: flex;
+        }
+
+        .connection-list {
+            width: 45%;
+        }
+
+        #input-form {
+            width: 50%;
+        }
+
+        input {
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        .incom {
+            margin-bottom: 5px;
+        }
+
+        .chat {
+            width: 49%;
+            background: #9c9999;
+            margin: 10px;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .private-chat {
+            width: 49%;
+            background: #9c9999;
+            margin: 10px;
+            border-radius: 8px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cont">
+
+        <div class="header">
+
+            <form id="input-form">
+                <label for="string"></label>
+                <input name="string" id="input" type="text" placeholder=" Ваше сообщение">
+            </form>
+
+            <div class="connection-list">
+
+                <ul id="connection-list">
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="body" id="body">
+
+            <div class="chat" id="chat">
+                <p style="margin-bottom: 6px;">Общий чат: </p>
+            </div>
+
+            <div class="private-chat" id="private-chat">
+                <p style="margin-bottom: 6px;">Приватный чат: </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"
+    integrity="sha512-Z6C1p1NIexPj5MsVUunW4pg7uMX6/TT3CUVldmjXx2kpip1eZcrAnxIusDxyFIikyM9A61zOVNgvLr/TGudOQg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script defer src="index.js"></script>
+
+</html>
