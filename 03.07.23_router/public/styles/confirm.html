@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтвердите регистрацию</title>
+</head>
+<body>
+
+    <h2>Подтвердите регистрацию</h2>
+    <p>Мы выслали вам на почту (в нашу консоль) код подтверждения. Введите его ниже, чтобы завершить регистрацию:</p>
+    <form action="/confirmed" method="post">
+        <label for="code">Код подтверждения: </label>
+        <input name="code" type="text"><br>
+        <input type="submit" title="Подтвердить">
+    </form>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 400px;
+            margin: 0 auto;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+        }
+    </style>
+
+
+</body>
+</html>
